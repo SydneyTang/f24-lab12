@@ -9,13 +9,11 @@ public class LibraryAccount {
      * share a single account, the user ID is of the form "libraryID:userName".
      * e.g., "12345:John Doe"
      *
-     * @param userId the ID of the user whose books are to be retrieved
+     * @param userId the user ID whose books are to be retrieved, in the form "libraryID:userName"
      * @return an array of Book objects the user has checked out
      */
     public Book[] getBooks(String userId) {
-        String[] parts = userId.split(":");
-        String name = parts[0];
-        String id = parts[1];
-        return libraryService.getBooks(name, id);        
+        UserId user = new UserId(userId); // Create a UserId object from the input
+        return libraryService.getBooks(user.getName(), user.getId());  // Use name and id from the UserId object
     }
 }
